@@ -4,51 +4,75 @@ import java.awt.event.*;
 
 public class NewCal {
         JLabel label = new JLabel("0",SwingConstants.RIGHT);
-
+        static public int isLight = 0;
+        static JButton lighted;
         static BtnProcess bp = new BtnProcess();
 
 	public static void main(String[] args) 
         {
-                //安安你好我是UTF8
+                //這裡沒有東西
         }
-       NewCal(){
+       
+       NewCal()
+       {
         JFrame demo = new JFrame();
-        demo.setSize(326, 550);
-        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        demo.getContentPane().setLayout(new FlowLayout(0,0,0));
-       // demo.setHgap(0);
-        Panel p1 = new Panel(new FlowLayout(FlowLayout.CENTER));
-        p1.setSize(310, 100);
-        p1.setBackground(Color.darkGray);
-        label.setPreferredSize(new Dimension(310,110));
-       // label.setLocation(20,10);
-        label.setFont(new Font("Forte",Font.BOLD,50));
-        label.setForeground(Color.white);
-        label.setBackground(Color.black);
-        p1.add(label);
-        demo.add(p1);
-        String[] list = {"sqrt", "sin","cos","/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="};                 
-        for (int i = 0; i < 20; i++) {
-            JButton a = new JButton("" + list[i]);
-            a.setFont(new Font("Forte", Font.BOLD, 24));
-            a.setFocusPainted(false);
-            a.setBackground(Color.GRAY);
-            a.setPreferredSize(new Dimension(80,80));
-            if(i%4==3 && i!=19){
-                a.setName("b" + list[i]);
-                a.setBackground(Color.ORANGE);
-            }else if(i<=3){
-                a.setName("u" + list[i]);
-            }else{
-                a.setName(list[i]);
-            }
-            a.addActionListener(new BtnHandler());
-            a.addKeyListener(new BtnListener());
-            a.setFocusable(true);
-            demo.add(a);
-        }
-        demo.setResizable(false); 
-        demo.setVisible(true);
+                demo.setSize(566, 460);
+                demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                demo.getContentPane().setLayout(new FlowLayout(0,0,0));
+                Panel p1 = new Panel(new FlowLayout(FlowLayout.CENTER));
+                p1.setSize(550, 100);
+                p1.setBackground(new Color(33, 33, 33));
+                label.setPreferredSize(new Dimension(550,100));
+                label.setForeground(Color.white);
+                label.setLocation(20,10);
+                label.setFont(new Font("Forte",Font.PLAIN,60));
+                p1.add(label);
+                demo.add(p1);
+
+                String[] list = {"7", "8","9","÷", "C", "√", "n!", "4", "5", "6", "X", "del", "sin", "1/x", "1", "2", "3", "-", "%", "cos", "log", "0", ".", "+", "=", "tan", "^"}; 
+                for (int i = 0; i < 27; i++) {
+                	JButton a = new JButton("" + list[i]);
+                    a.setFont(new Font("Forte", Font.PLAIN, 24));
+                    a.setFocusPainted(false);
+                    a.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    if (i == 21) {
+                       	a.setPreferredSize(new Dimension(160,80));
+                    }else{
+                       	a.setPreferredSize(new Dimension(80,80));
+                    }
+                    if(i % 7 == 3 || i == 18 || i == 26 || i == 23)
+                    {
+                        a.setName("b" + list[i]);
+                    }else if(i % 7 == 5 || i % 7 == 6 || i == 25){
+                        if (i != 26) {
+                        	a.setName("u" + list[i]);
+                        }
+                    }else{
+                        a.setName(list[i]);
+                    }
+                    if (i % 7 == 0 || i % 7 == 1 || i % 7 == 2) {
+                    	if (i != 23) {
+                    		a.setBackground(new Color(209, 210, 212));
+                    		a.setForeground(Color.black);
+                    	}
+                    }
+                    if (i % 7 == 3 || i % 7 == 4 || i == 23) {
+                    	if (i != 25) {
+                    		a.setBackground(new Color(249, 127, 16));
+                    		a.setForeground(Color.white);
+                    	}
+                    }
+                    if (i % 7 == 5 || i % 7 == 6 || i == 25) {
+                    	a.setBackground(new Color(197, 198, 200));
+                    	a.setForeground(Color.black);
+                    }
+                    a.addActionListener(new BtnHandler());
+                    a.addKeyListener(new BtnListener());
+                    a.setFocusable(true);
+                    demo.add(a);
+               }
+               demo.setResizable(false); 
+               demo.setVisible(true);
        }
 
 
@@ -60,17 +84,24 @@ public class NewCal {
                         Object obj = event.getSource();                        
                         if(obj instanceof JButton)
                         {      
-                            JButton btn = (JButton)obj;
-                            String btnName = btn.getName();
-                            if(btnName.startsWith("b")&& btn.getForeground() != Color.BLUE){
-                                //System.out.println(btn.getForeground());
-                                btn.setBorder(BorderFactory.createLineBorder(Color.black,2));
-                                //btn.setForeground(Color.BLUE);
-                            }else{
-                                btn.setForeground(Color.darkGray);
-                            }
-                            System.out.println(btnName);                 
-                            bp.checkType(btnName);
+                                JButton btn = (JButton)obj;
+                                String btnName = btn.getName();
+                                System.out.println(btnName);
+                                bp.checkType(btnName);
+                                if(isLight == 1)
+                                {
+                                  bp.changeColor(lighted, "nolight");
+                                  lighted = null;
+                                  isLight = 0;
+                                  System.out.println("isLight = " + isLight);
+                                }
+                                if((btnName.startsWith("b")) && isLight == 0)
+                                {
+                                    lighted = btn;
+                                    bp.changeColor(btn, "light");
+                                    isLight = 1;
+                                    System.out.println("isLight = " + isLight);
+                                }
                         }
                 }
         }
@@ -78,7 +109,9 @@ public class NewCal {
         class BtnListener extends KeyAdapter{
           public void keyPressed(KeyEvent event){
             String btnName = "";
-            if (event.getKeyCode() >= 96 && event.getKeyCode() <=105) {
+            if (event.getKeyCode() >= 48 && event.getKeyCode() <=57) {
+              btnName = String.valueOf(event.getKeyCode() - 48);
+            }else if(event.getKeyCode() >= 96 && event.getKeyCode() <=105){
               btnName = String.valueOf(event.getKeyCode() - 96);
             }else if (event.getKeyCode() == 107) {
               btnName = "b+";
@@ -93,10 +126,9 @@ public class NewCal {
             }else if (event.getKeyCode() == 110) {
               btnName = ".";
             }else if (event.getKeyChar() == 'c' || event.getKeyChar() == 'C') {
-                btnName = "C";
-            }
-            else{
-              System.out.println(event.getKeyCode());
+            	btnName = "C";
+            }else{
+              System.out.println(event.getKeyChar());
             }
             System.out.println(btnName);
             if (btnName != "") {
@@ -108,3 +140,4 @@ public class NewCal {
 }   
 
 
+/**//**//**//**//**//**//**//**//**//**//**//**//**//*youporn*//*redtube*//*porn-hub*/
