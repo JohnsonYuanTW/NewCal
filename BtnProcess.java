@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class BtnProcess extends NewCal
 {
@@ -13,48 +12,26 @@ public class BtnProcess extends NewCal
 	{
 		
 	}
-
-	public void changeColor(JButton btn, String status)
-	{
-		if(status == "light")
-		{
-			btn.setBackground(new Color(184, 207, 229));
-		}else
-		{
-			btn.setBackground(Color.GRAY);
-			System.out.println("color changed");
-		}
-	}
-
 	public void checkType(String text)
-	{
-
+	{	
+	//	System.out.println(a.getName());
 		if(text.startsWith("b"))
 		{
+
 			//System.out.println("Call Binary");
 			text = text.replace("b","");
-			if(num1 != null && num1.equals(label.getText()))
+			if(isCaling == 1)
 			{
-				//no exe
-				symbol = text;
-				System.out.println("equals");
+				bin(text);
 			}else
 			{
-				//exe
-				System.out.println("not equals");
-				text = text.replace("b","");
-				if(isCaling == 1)
-				{
-					bin(text);
-				}else
-				{
-					//System.out.println("not caling "  + num1 + text);
-					num1 = label.getText();
-					isCaling = 1;
-				}
-				isAC = 1;
-				symbol = text;
+				//System.out.println("not caling "  + num1 + text);
+				num1 = label.getText();
+				isCaling = 1;
+				//System.out.println(btn.getName());
 			}
+			isAC = 1;
+			symbol = text;
 		}else if(text.startsWith("u"))
 		{
 			//System.out.println("Call Unary");
@@ -93,7 +70,6 @@ public class BtnProcess extends NewCal
 				bin(text);
 			}
 			isAC = 1;
-			symbol = null;
 
 		}else
 		{
