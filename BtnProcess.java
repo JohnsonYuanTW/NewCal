@@ -135,6 +135,9 @@ public class BtnProcess extends NewCal
 				case "÷":
 					ans = Double.valueOf(num1) / Double.valueOf(label.getText());
 					break;
+				case "^":
+					ans = Math.pow(Double.valueOf(num1), Double.valueOf(label.getText()));
+					break;
 				default:
 					label.setText("Error");
 					break;
@@ -166,11 +169,9 @@ public class BtnProcess extends NewCal
  				ans *= i; 
  			}
  			break;
-
  			case "log":
  			ans = Math.log10(Double.valueOf(label.getText()));
  			break;
-
 			case "sin":
 			if(Double.valueOf(label.getText()) % 180 == 0)
 				ans = 0;
@@ -185,6 +186,16 @@ public class BtnProcess extends NewCal
 			break;
 			case "tan":
 			ans = Math.tan(Math.toRadians(Double.valueOf(label.getText())));
+			break;
+			case "+/-":
+			if(text.startsWith("-"))
+			{
+				label.setText(text.replace("-", ""));
+			}
+			else
+			{
+				label.setText("-" + text);
+			}
 			break;
 			default:
 			System.out.println("Default");
