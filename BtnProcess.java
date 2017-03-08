@@ -18,10 +18,13 @@ public class BtnProcess extends NewCal
 	{
 		if(status == "light")
 		{
-			btn.setBackground(new Color(184, 207, 229));
+			//btn.setBackground(new Color(184, 207, 229));
+			btn.setBorder(BorderFactory.createLineBorder(Color.black,2));
 		}else
 		{
-			btn.setBackground(Color.GRAY);
+			//btn.setBackground(Color.GRAY);		
+			btn.setBorder(BorderFactory.createEmptyBorder());
+			btn.setBorder(BorderFactory.createLineBorder(Color.black,1));
 			System.out.println("color changed");
 		}
 	}
