@@ -85,8 +85,17 @@ public class BtnProcess extends NewCal
 				label.setText(label.getText() + ".");
 			}
 
-
-
+		}else if(text.startsWith("del"))
+		{
+			//do
+			if (label.getText().length() == 1) 
+			{
+				label.setText("0");
+			}else
+			{
+				label.setText(label.getText().substring(0,label.getText().length()-1));
+			}
+			
 		}else if(text.startsWith("="))
 		{
 			//System.out.println("This is a Equal Sign");
@@ -184,19 +193,25 @@ public class BtnProcess extends NewCal
 			else
 				ans = Math.cos(Math.toRadians(Double.valueOf(label.getText())));
 			break;
+
 			case "tan":
-			ans = Math.tan(Math.toRadians(Double.valueOf(label.getText())));
+			//ans = Math.tan(Math.toRadians(Double.valueOf(label.getText())));
+			ans = (Math.sin(Math.toRadians(Double.valueOf(label.getText()))) / Math.cos(Math.toRadians(Double.valueOf(label.getText()))));
 			break;
+
 			case "+/-":
-			if(text.startsWith("-"))
+			if(label.getText().contains("-"))
 			{
-				label.setText(text.replace("-", ""));
+				label.setText(label.getText().replace("-", ""));
+				System.out.println(label.getText());
 			}
 			else
 			{
-				label.setText("-" + text);
+				label.setText("Hello");
+				System.out.println("without" + label.getText());
 			}
 			break;
+
 			default:
 			System.out.println("Default");
 		}
