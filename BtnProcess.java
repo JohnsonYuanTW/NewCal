@@ -183,6 +183,9 @@ public class BtnProcess extends NewCal
 			else
 				ans = Math.cos(Math.toRadians(Double.valueOf(label.getText())));
 			break;
+			case "tan":
+			ans = Math.tan(Math.toRadians(Double.valueOf(label.getText())));
+			break;
 			default:
 			System.out.println("Default");
 		}
