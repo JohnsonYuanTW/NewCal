@@ -29,40 +29,32 @@ public class NewCal {
                 p1.add(label);
                 demo.add(p1);
 
-                String[] list = {"7", "8","9","÷", "C", "√", "n!", "4", "5", "6", "X", "del", "sin", "1/x", "1", "2", "3", "-", "%", "cos", "log", "0", ".", "+", "=", "tan", "^"}; 
-                for (int i = 0; i < 27; i++) {
+                String[] list = {"√", "^","C","÷", "7", "8", "9", "sin", "x!", "del", "X", "4", "5", "6", "cos", "1/x", "%", "-", "1", "2", "3", "tan", "log", "=", "+", "+/-", "0", "."}; 
+                for (int i = 0; i < 28; i++) {
                 	JButton a = new JButton("" + list[i]);
                     a.setFont(new Font("Forte", Font.PLAIN, 24));
                     a.setFocusPainted(false);
                     a.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                    if (i == 21) {
-                       	a.setPreferredSize(new Dimension(160,80));
-                    }else{
-                       	a.setPreferredSize(new Dimension(80,80));
-                    }
-                    if(i % 7 == 3 || i == 18 || i == 26 || i == 23)
+                    a.setPreferredSize(new Dimension(80,80));
+                    if(i % 7 == 3 || i == 1 || i == 16)
                     {
                         a.setName("b" + list[i]);
-                    }else if(i % 7 == 5 || i % 7 == 6 || i == 25){
-                        if (i != 26) {
+                    }else if(i % 7 == 0 || i % 7 == 1 || i == 25){
+                        if (i != 1) {
                         	a.setName("u" + list[i]);
                         }
                     }else{
                         a.setName(list[i]);
                     }
-                    if (i % 7 == 0 || i % 7 == 1 || i % 7 == 2) {
-                    	if (i != 23) {
-                    		a.setBackground(new Color(209, 210, 212));
-                    		a.setForeground(Color.black);
-                    	}
+                    if (i % 7 == 4 || i % 7 == 5 || i % 7 == 6) {
+                    	a.setBackground(new Color(209, 210, 212));
+                    	a.setForeground(Color.black);
                     }
-                    if (i % 7 == 3 || i % 7 == 4 || i == 23) {
-                    	if (i != 25) {
-                    		a.setBackground(new Color(249, 127, 16));
-                    		a.setForeground(Color.white);
-                    	}
+                    if (i % 7 == 2 || i % 7 == 3) {
+                    	a.setBackground(new Color(249, 127, 16));
+                    	a.setForeground(Color.white);
                     }
-                    if (i % 7 == 5 || i % 7 == 6 || i == 25) {
+                    if (i % 7 == 0 || i % 7 == 1) {
                     	a.setBackground(new Color(197, 198, 200));
                     	a.setForeground(Color.black);
                     }
@@ -113,15 +105,20 @@ public class NewCal {
               btnName = String.valueOf(event.getKeyCode() - 48);
             }else if(event.getKeyCode() >= 96 && event.getKeyCode() <=105){
               btnName = String.valueOf(event.getKeyCode() - 96);
-            }else if (event.getKeyCode() == 107) {
-              btnName = "b+";
-            }else if (event.getKeyCode() == 106) {
-              btnName = "b*";
-            }else if (event.getKeyCode() == 109) {
-              btnName = "b-";
-            }else if (event.getKeyCode() == 111) {
-              btnName = "b/";
-            }else if (event.getKeyCode() == 10) {
+			}else if(event.getKeyCode() >= 106 && event.getKeyCode() <= 111 && event.getKeyCode()!= 108 && event.getKeyCode() != 110){
+				btnName = "b" + event.getKeyChar();
+			/*	if(isLight == 1){
+                    bp.changeColor(lighted, "nolight");
+                    lighted = null;
+                    isLight = 0;
+                    System.out.println("isLight = " + isLight);
+                }if((btnName.startsWith("b")) && isLight == 0){
+                    lighted = btn;
+                    bp.changeColor(btn, "light");
+                    isLight = 1;
+                    System.out.println("isLight = " + isLight);
+                }*/
+			}else if (event.getKeyCode() == 10) {
               btnName = "=";
             }else if (event.getKeyCode() == 110) {
               btnName = ".";
