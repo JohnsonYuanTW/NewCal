@@ -47,14 +47,14 @@ public class NewCal {
                         a.setName(list[i]);
                     }
                     if (i % 7 == 4 || i % 7 == 5 || i % 7 == 6) {
-                    	a.setBackground(new Color(209, 210, 212));
-                    	a.setForeground(Color.black);
+                        a.setBackground(new Color(209, 210, 212));
+                        a.setForeground(Color.black);
                     }
                     if (i % 7 == 2 || i % 7 == 3) {
-                    	a.setBackground(new Color(249, 127, 16));
-                    	a.setForeground(Color.white);
+                        a.setBackground(new Color(249, 127, 16));
+                        a.setForeground(Color.white);
                     }
-                    if (i % 7 == 0 || i % 7 == 1) {
+                    if (i % 7 == 0 || i % 7 == 1) { 
                     	a.setBackground(new Color(197, 198, 200));
                     	a.setForeground(Color.black);
                     }
@@ -66,6 +66,7 @@ public class NewCal {
                demo.setResizable(false); 
                demo.setVisible(true);
        }
+   
 
 
         static class BtnHandler implements ActionListener
@@ -105,20 +106,15 @@ public class NewCal {
               btnName = String.valueOf(event.getKeyCode() - 48);
             }else if(event.getKeyCode() >= 96 && event.getKeyCode() <=105){
               btnName = String.valueOf(event.getKeyCode() - 96);
-			}else if(event.getKeyCode() >= 106 && event.getKeyCode() <= 111 && event.getKeyCode()!= 108 && event.getKeyCode() != 110){
-				btnName = "b" + event.getKeyChar();
-			/*	if(isLight == 1){
-                    bp.changeColor(lighted, "nolight");
-                    lighted = null;
-                    isLight = 0;
-                    System.out.println("isLight = " + isLight);
-                }if((btnName.startsWith("b")) && isLight == 0){
-                    lighted = btn;
-                    bp.changeColor(btn, "light");
-                    isLight = 1;
-                    System.out.println("isLight = " + isLight);
-                }*/
-			}else if (event.getKeyCode() == 10) {
+            }else if (event.getKeyCode() == 107) {
+              btnName = "b+";
+            }else if (event.getKeyCode() == 106) {
+              btnName = "b*";
+            }else if (event.getKeyCode() == 109) {
+              btnName = "b-";
+            }else if (event.getKeyCode() == 111) {
+              btnName = "b/";
+            }else if (event.getKeyCode() == 10) {
               btnName = "=";
             }else if (event.getKeyCode() == 110) {
               btnName = ".";
